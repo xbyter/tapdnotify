@@ -1,0 +1,44 @@
+﻿<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #options_div {
+            padding: 25px;
+            width: 400px;
+            border: 1px solid #ddd;
+        }
+        ul {
+            padding: 10px;
+            list-style: none;
+            font-size: 14px;
+        }
+        ul li {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="options_div">
+    <h1>通知提示设置</h1>
+    <ul>
+        <li>
+            <label>
+                <input type="radio" value="detail" name="notify_type" id="show_detail"> 显示详细通知(TAPD右上角新任务通知数字会消失)
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="radio" value="simple" name="notify_type" id="show_simple"> 只显示通知(不提示具体任务)
+            </label>
+        </li>
+    </ul>
+</div>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script src="js/base.js"></script>
+<script src="js/options.js"></script>
+</body>
+</html>
