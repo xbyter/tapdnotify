@@ -109,7 +109,7 @@ function showNotifyMessage() {
             var storage = parseInt(getStorage(key));
             var storageCount = parseInt(getStorage(keyCount)) || 0;
             var time = new Date().getTime();
-            if (!storage || (storage + 60 * 2 * 1000 < time && storageCount < 3)) {//每2分钟显示一次
+            if (!storage || (storage + 60 * 2 * (1 + storageCount) * 1000 < time && storageCount < 3)) {//每2分钟显示一次
                 setStorage(key, time);
                 setStorage(keyCount, ++storageCount);
                 showNotify('您有' + count + '条通知未读', '点击跳转去通知页', 'https://www.tapd.cn/letters');
@@ -123,7 +123,7 @@ function showNotifyMessage() {
                 var storage = parseInt(getStorage(key));
                 var storageCount = parseInt(getStorage(keyCount)) || 0;
                 var time = new Date().getTime();
-                if (!storage || (storage + 60 * 5 * 1000 < time && storageCount < 3)) {//未读并且每5分钟显示一次, 提示不超过3次
+                if (!storage || (storage + 60 * 5 * (1 + storageCount) * 1000 < time && storageCount < 3)) {//未读并且每5分钟显示一次, 提示不超过3次
                     setStorage(key, time);
                     setStorage(keyCount, ++storageCount);
                     showNotify(item.user + ' - ' + item.date, item.title + "\n" + item.content, item.url);
