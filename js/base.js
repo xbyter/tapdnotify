@@ -81,20 +81,20 @@ function getMessage(callback) {
 }
 
 function getStorage(key) {
-    return localStorage.getItem(key);
+    return sessionStorage.getItem(key);
 }
 
 function setStorage(key, value) {
-    return localStorage.setItem(key, value);
+    return sessionStorage.setItem(key, value);
 }
 
 function removeStorage(keys) {
-    return localStorage.removeItem(keys);
+    return sessionStorage.removeItem(keys);
 }
 
 
 function clearStorage() {
-    return localStorage.clear();
+    return sessionStorage.clear();
 }
 
 //显示消息通知
@@ -105,10 +105,13 @@ function showNotifyMessage() {
         if (count > 0) {
             var userId = getUserId();
             var key = 'show_unread_notify:' + userId + ':' + count;
+            var keyCount = key + ':count';
             var storage = parseInt(getStorage(key));
+            var storageCount = parseInt(getStorage(keyCount)) || 0;
             var time = new Date().getTime();
-            if (!storage || storage + 60 * 2 * 1000 < time) {//每2分钟显示一次
+            if (!storage || (storage + 60 * 2 * 1000 < time && storageCount < 3)) {//每2分钟显示一次
                 setStorage(key, time);
+                setStorage(keyCount, ++storageCount);
                 showNotify('您有' + count + '条通知未读', '点击跳转去通知页', 'https://www.tapd.cn/letters');
             }
         }
@@ -116,10 +119,13 @@ function showNotifyMessage() {
         getUnreadMessage(function (data) {
             $.each(data, function (i, item) {
                 var key = item.user + ':' + item.date + ':' + item.title;
+                var keyCount = key + ':count';
                 var storage = parseInt(getStorage(key));
+                var storageCount = parseInt(getStorage(keyCount)) || 0;
                 var time = new Date().getTime();
-                if (!storage || storage + 60 * 5 * 1000 < time) {//未读并且每5分钟显示一次
+                if (!storage || (storage + 60 * 5 * 1000 < time && storageCount < 3)) {//未读并且每5分钟显示一次, 提示不超过3次
                     setStorage(key, time);
+                    setStorage(keyCount, ++storageCount);
                     showNotify(item.user + ' - ' + item.date, item.title + "\n" + item.content, item.url);
                 }
             });

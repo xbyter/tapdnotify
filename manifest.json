@@ -1,8 +1,8 @@
 ﻿{
     "manifest_version": 2,
-    "name": "TAPD提醒",
-    "version": "1.2",
-    "description": "TAPD消息提醒",
+    "name": "TAPD桌面消息通知",
+    "version": "1.2.2",
+    "description": "TAPD桌面消息通知",
     "icons": {
         "16": "images/icon-google.png",
         "48": "images/icon-google.png",
@@ -13,7 +13,7 @@
             "19": "images/icon-google.png",
             "38": "images/icon-google.png"
         },
-        "default_title": "TAPD消息提醒",
+        "default_title": "TAPD桌面消息通知",
         "default_popup": "popup.html"
     },
 	"options_page": "options.html",
